@@ -44,7 +44,7 @@ if (!isset($_GET['code'])) {
     try {
 
         // Try to get an access token using the authorization code grant.
-        $accessToken = $provider->getAccessToken('authorization_code', [
+        $accessToken = $provider->getAccessToken('member:read', [
             'code' => $_GET['code']
         ]);
 
