@@ -48,6 +48,8 @@ if (!isset($_GET['code'])) {
             'code' => $_GET['code']
         ]);
 
+        echo "hi";
+
         // We have an access token, which we may use in authenticated
         // requests against the service provider's API.
         echo 'Access Token: ' . $accessToken->getToken() . "<br>";
