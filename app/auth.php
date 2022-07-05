@@ -62,11 +62,11 @@ if (!isset($_GET['code'])) {
         // The provider provides a way to get an authenticated API request for
         // the service, using the access token; it returns an object conforming
         // to Psr\Http\Message\RequestInterface.
-        $request = $provider->getAuthenticatedRequest(
+        /*$request = $provider->getAuthenticatedRequest(
             'GET',
             'https://service.example.com/resource',
             $accessToken
-        );
+        );*/
 
     } catch (\League\OAuth2\Client\Provider\Exception\IdentityProviderException $e) {
 
