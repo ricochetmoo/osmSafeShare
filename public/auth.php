@@ -51,6 +51,8 @@ if (!isset($_GET['code'])) {
         $res = json_decode(curl_exec());
         curl_close();
 
+        header('Location: setCookie.php?token=' . $res['access_token']);
+
     } catch (\League\OAuth2\Client\Provider\Exception\IdentityProviderException $e) {
 
         // Failed to get the access token or user details.
