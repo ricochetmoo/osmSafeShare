@@ -6,3 +6,5 @@ function setCookie()
 
 	window.location.href = "index.html";
 }
+
+setCookie();
