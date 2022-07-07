@@ -43,50 +43,17 @@ if (!isset($_GET['code'])) {
 
     try {
 
-        // Try to get an access token using the authorization code grant.
-        /*$accessToken = $provider->getAccessToken('code', [
-            'code' => $_GET['code']
-        ]);
-
-        echo "hi";*/
-
-        $url = "http://www.onlinescoutmanager.co.uk/oauth/token?grant_type=authorization_code&client_id=" . $_ENV['OSM_CLIENT_ID'] . "&client_secret=" . $_ENV['OSM_CLIENT_SECRET'] . "&redirecturi=" . urlencode($_ENV['APP_URI'] . '/app/auth.php') . "&code=" . $_GET['code'];
+        $url = "https://www.onlinescoutmanager.co.uk/oauth/token?grant_type=authorization_code&client_id=" . $_ENV['OSM_CLIENT_ID'] . "&client_secret=" . $_ENV['OSM_CLIENT_SECRET'] . "&redirect_uri=" . urlencode($_ENV['APP_URI'] . '/app/auth.php') . "&code=" . $_GET['code'];
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURL_RETURNTRANSFER, 1);
-        $res = curl_exec();
+        $res = json_decode(curl_exec());
         curl_close();
-
-        echo $res;
-
-        // We have an access token, which we may use in authenticated
-        // requests against the service provider's API.
-        echo 'Access Token: ' . $accessToken->getToken() . "<br>";
-        echo 'Refresh Token: ' . $accessToken->getRefreshToken() . "<br>";
-        echo 'Expired in: ' . $accessToken->getExpires() . "<br>";
-        echo 'Already expired? ' . ($accessToken->hasExpired() ? 'expired' : 'not expired') . "<br>";
-
-        // Using the access token, we may look up details about the
-        // resource owner.
-        $resourceOwner = $provider->getResourceOwner($accessToken);
-
-        var_export($resourceOwner->toArray());
-
-        // The provider provides a way to get an authenticated API request for
-        // the service, using the access token; it returns an object conforming
-        // to Psr\Http\Message\RequestInterface.
-        /*$request = $provider->getAuthenticatedRequest(
-            'GET',
-            'https://service.example.com/resource',
-            $accessToken
-        );*/
 
     } catch (\League\OAuth2\Client\Provider\Exception\IdentityProviderException $e) {
 
         // Failed to get the access token or user details.
-        echo "hi";
         exit($e->getMessage());
     }
 
