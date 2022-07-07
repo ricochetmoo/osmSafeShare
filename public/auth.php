@@ -8,7 +8,7 @@ $provider = new \League\OAuth2\Client\Provider\GenericProvider
 ([
 	'clientId' => $_ENV['OSM_CLIENT_ID'],
 	'clientSecret' => $_ENV['OSM_CLIENT_SECRET'],
-	'redirectUri' => $_ENV['APP_URI'] . '/app/auth.php',
+	'redirectUri' => $_ENV['APP_URI'] . '/auth.php',
 	'urlAuthorize' => 'https://onlinescoutmanager.co.uk/oauth/authorize',
 	'urlAccessToken' => 'https://onlinescoutmanager.co.uk/oauth/token',
 	'urlResourceOwnerDetails' => 'https://onlinescoutmanager.co.uk/oauth/resource',
@@ -43,7 +43,7 @@ if (!isset($_GET['code'])) {
 
     try {
 
-        $url = "https://www.onlinescoutmanager.co.uk/oauth/token?grant_type=authorization_code&client_id=" . $_ENV['OSM_CLIENT_ID'] . "&client_secret=" . $_ENV['OSM_CLIENT_SECRET'] . "&redirect_uri=" . urlencode($_ENV['APP_URI'] . '/app/auth.php') . "&code=" . $_GET['code'];
+        $url = "https://www.onlinescoutmanager.co.uk/oauth/token?grant_type=authorization_code&client_id=" . $_ENV['OSM_CLIENT_ID'] . "&client_secret=" . $_ENV['OSM_CLIENT_SECRET'] . "&redirect_uri=" . urlencode($_ENV['APP_URI'] . '/auth.php') . "&code=" . $_GET['code'];
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
