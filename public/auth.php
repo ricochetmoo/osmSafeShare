@@ -47,7 +47,7 @@ if (!isset($_GET['code'])) {
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURL_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         $res = json_decode(curl_exec());
         curl_close();
 
