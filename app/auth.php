@@ -44,11 +44,22 @@ if (!isset($_GET['code'])) {
     try {
 
         // Try to get an access token using the authorization code grant.
-        $accessToken = $provider->getAccessToken('code', [
+        /*$accessToken = $provider->getAccessToken('code', [
             'code' => $_GET['code']
         ]);
 
-        echo "hi";
+        echo "hi";*/
+
+        $url = "http://www.onlinescoutmanager.co.uk/oauth/token?grant_type=authorization_code&client_id=" . $_ENV['OSM_CLIENT_ID'] . "&client_secret=" . $_ENV['OSM_CLIENT_SECRET'] . "&redirecturi=" . urlencode($_ENV['APP_URI'] . '/app/auth.php') . "&code=" . $_GET['code'];
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURL_RETURNTRANSFER, 1);
+        $res = curl_exec();
+        curl_close();
+
+        echo $res;
 
         // We have an access token, which we may use in authenticated
         // requests against the service provider's API.
