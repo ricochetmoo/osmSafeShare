@@ -13,7 +13,7 @@ function getUserDetails()
 	xhr.setRequestHeader("Authorization", "Bearer " + Cookies.get('oauth-token'));
 	xhr.send(null);
 
-	console.log(xhr.responseText);
+	document.querySelector("#name").innerHTML = xhr.responseText.full_name;
 }
 
 redirectIfLoggedOut();
