@@ -13,7 +13,7 @@ function getUserDetails()
 	xhr.setRequestHeader("Authorization", "Bearer " + Cookies.get('oauth-token'));
 	xhr.send(null);
 
-	const res = JSON.parse(xhr.responseText)
+	const res = JSON.parse(xhr.responseText).data;
 
 	document.querySelector("#name").innerHTML = res.full_name;
 
@@ -24,6 +24,7 @@ function getUserDetails()
 		{
 			const li = document.createElement("li");
 			li.innerHTML = section.section_name;
+			li.id = section.section_id;
 			sectionsList.appendChild(li);
 		}
 	);
