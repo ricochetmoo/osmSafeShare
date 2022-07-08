@@ -13,11 +13,13 @@ function getUserDetails()
 	xhr.setRequestHeader("Authorization", "Bearer " + Cookies.get('oauth-token'));
 	xhr.send(null);
 
-	document.querySelector("#name").innerHTML = xhr.responseText.full_name;
+	const res = JSON.parse(xhr.responseText)
+
+	document.querySelector("#name").innerHTML = res.full_name;
 
 	const sectionsList = document.querySelector("#sections");
 
-	xhr.responseText.sections.forEach
+	res.sections.forEach
 	(section =>
 		{
 			const li = document.createElement("li");
