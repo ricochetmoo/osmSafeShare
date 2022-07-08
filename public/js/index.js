@@ -56,7 +56,7 @@ function addEventListenersByClass(className, listener, method)
 	document.querySelectorAll("." + className).forEach
 	((element) =>
 	{
-		element.addEventListener(listener, method(this.id));
+		element.addEventListener(listener, method(element.id));
 	});
 }
 
