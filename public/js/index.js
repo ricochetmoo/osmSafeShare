@@ -14,6 +14,17 @@ function getUserDetails()
 	xhr.send(null);
 
 	document.querySelector("#name").innerHTML = xhr.responseText.full_name;
+
+	const sectionsList = document.querySelector("#sections");
+
+	xhr.responseText.sections.forEach
+	(section =>
+		{
+			const li = document.createElement("li");
+			li.innerHTML = section.section_name;
+			sectionsList.appendChild(li);
+		}
+	);
 }
 
 redirectIfLoggedOut();
