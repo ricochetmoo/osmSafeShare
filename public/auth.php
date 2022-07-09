@@ -12,8 +12,7 @@ $provider = new \League\OAuth2\Client\Provider\GenericProvider
 	'urlAuthorize' => 'https://onlinescoutmanager.co.uk/oauth/authorize',
 	'urlAccessToken' => 'https://onlinescoutmanager.co.uk/oauth/token',
 	'urlResourceOwnerDetails' => 'https://onlinescoutmanager.co.uk/oauth/resource',
-    /*'header' => ['Content-Type' => 'application/x-www-form-urlencoded']*/
-    'scope' => ['member:read']
+    'scopes' => ['member:read']
 ]);
 
 if (!isset($_GET['code'])) {

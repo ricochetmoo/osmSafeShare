@@ -39,29 +39,33 @@ function getUserDetails()
 		{
 			const li = document.createElement("li");
 			li.innerHTML = section.section_name;
-			li.id = section.section_id;
+			li.id = section.section_id + "-" + section.terms[0].term_id;
 			li.classList.add("section");
 			sectionsList.appendChild(li);
 		}
 	);
 }
 
-function getMembers(sectionId)
+function getMembers(sectionTermId)
 {
+	sectionTermId = sectionTermId.split("-");
+	
 	const data = 
 	{
-		"endpoint": "ext/members/contact/?action=getListOfMembers",
+		"endpoint": "ext/members/contact/",
 		"data":
 		{
+			"action": "getListOfMembers",
 			"sort": "dob",
-			"sectionid": sectionId
+			"sectionid": sectionTermId[0],
+			"termId": sectionTermId[1]
 		}	
 	};
 	
 	const xhr = new XMLHttpRequest();
 	xhr.open('GET', 'osmi/request.php');
 	xhr.setRequestHeader("Authorization", "Bearer " + Cookies.get('oauth-token'));
-	xhr.send(data);
+	xhr.send(JSON.stringify(data));
 
 	console.log(xhr.responseText);
 }
