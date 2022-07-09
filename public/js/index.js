@@ -77,4 +77,4 @@ function addEventListenersByClass(className, listener, method)
 
 redirectIfLoggedOut();
 getUserDetails();
-addEventListenersByClass("section", "onClick", getMembers);
+addEventListenersByClass("section", "click", getMembers);
