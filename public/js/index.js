@@ -1,8 +1,18 @@
+function redirectToLoginAndRemoveCookieIfSet()
+{
+	if (Cookies.get('oauth-token') != undefined)
+	{
+		Cookies.remove('oauth-token');
+	}
+	
+	window.location.href = 'login.html';
+}
+
 function redirectIfLoggedOut()
 {
 	if (Cookies.get('oauth-token') == undefined)
 	{
-		window.location.href = 'login.html';
+		redirectToLoginAndRemoveCookieIfSet();
 	}
 }
 
@@ -12,6 +22,11 @@ function getUserDetails()
 	xhr.open('GET', 'osmi/getUser.php', false);
 	xhr.setRequestHeader("Authorization", "Bearer " + Cookies.get('oauth-token'));
 	xhr.send(null);
+
+	if (xhr.status == 403)
+	{
+		redirectToLogin();
+	}
 
 	const res = JSON.parse(xhr.responseText).data;
 
