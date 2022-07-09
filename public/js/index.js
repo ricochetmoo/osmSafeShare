@@ -25,7 +25,7 @@ function getUserDetails()
 
 	if (xhr.status == 403)
 	{
-		redirectToLogin();
+		redirectToLoginAndRemoveCookieIfSet();
 	}
 
 	const res = JSON.parse(xhr.responseText).data;
