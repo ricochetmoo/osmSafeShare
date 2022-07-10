@@ -58,7 +58,7 @@ function getMembers(sectionTermId)
 			"action": "getListOfMembers",
 			"sort": "dob",
 			"sectionid": sectionTermId[0],
-			"termId": sectionTermId[1]
+			"termid": sectionTermId[1]
 		}	
 	};
 	
