@@ -91,13 +91,13 @@ function getAndPopulateMembers(sectionTermId)
 {
 	const members = getMembers(sectionTermId);
 	
-	const membersList = document.querySelector("#yp");
+	const membersList = document.querySelector("#members");
 	membersList.innerHTML = "";
 
 	members.items.forEach((member) =>
 	{
 		const li = document.createElement("li");
-		li.innerHTML = member.firstname + " " + member.lastname;
+		li.innerHTML = member.firstname + " " + member.lastname + " (" + member.age + ")";
 		membersList.appendChild(li);
 	});
 }
