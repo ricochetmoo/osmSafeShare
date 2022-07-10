@@ -67,6 +67,11 @@ function getMembers(sectionTermId)
 	xhr.setRequestHeader("Authorization", "Bearer " + Cookies.get('oauth-token'));
 	xhr.send(JSON.stringify(data));
 
+	if (xhr.status == 403)
+	{
+		redirectToLoginAndRemoveCookieIfSet();
+	}
+
 	return JSON.parse(xhr.responseText);
 }
 
