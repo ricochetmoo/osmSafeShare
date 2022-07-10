@@ -4,7 +4,7 @@ $token = $_SERVER['HTTP_AUTHORIZATION'];
 
 $json = json_decode(file_get_contents('php://input'));
 
-$endpoint = $_POST['endpoint'] . '?' . http_build_query($json->data, null, '&');
+$endpoint = $json->endpoint . '?' . http_build_query($json->data, null, '&');
 
 $ch = curl_init();
 curl_setopt($ch, CURLOPT_URL, "https://www.onlinescoutmanager.co.uk/" . $endpoint);
