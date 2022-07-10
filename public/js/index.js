@@ -67,12 +67,22 @@ function getMembers(sectionTermId)
 	xhr.setRequestHeader("Authorization", "Bearer " + Cookies.get('oauth-token'));
 	xhr.send(JSON.stringify(data));
 
-	console.log(xhr.responseText);
+	return JSON.parse(xhr.responseText);
 }
 
-function populateMembers(members)
+function getAndPopulateMembers(sectionTermId)
 {
+	const members = getMembers(sectionTermId);
 	
+	const membersList = document.querySelector("#yp");
+	membersList.innerHTML = "";
+
+	members.items.forEach((member) =>
+	{
+		const li = document.createElement("li");
+		li.innerHTML = member.firstName + " " + member.lastName;
+		membersList.appendChild(li);
+	});
 }
 
 function addEventListenersByClass(className, listener, method)
@@ -86,4 +96,4 @@ function addEventListenersByClass(className, listener, method)
 
 redirectIfLoggedOut();
 getUserDetails();
-addEventListenersByClass("section", "click", getMembers);
+addEventListenersByClass("section", "click", getAndPopulateMembers);
