@@ -39,8 +39,20 @@ function getUserDetails()
 		{
 			const li = document.createElement("li");
 			li.innerHTML = section.section_name;
-			li.id = section.section_id + "-" + section.terms[0].term_id;
-			li.classList.add("section");
+			
+			const ul = document.createElement("ul");
+			section.terms.forEach((term) =>
+			{
+				const termLi = document.createElement("li");
+				termLi.innerHTML = term.name;
+				termLi.id = section.section_id + "-" + term.term_id;
+				termLi.classList.add("section");
+
+				ul.appendChild(termLi);
+			});
+
+			li.appendChild(ul);
+
 			sectionsList.appendChild(li);
 		}
 	);
