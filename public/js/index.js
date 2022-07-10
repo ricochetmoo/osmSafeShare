@@ -80,7 +80,7 @@ function getAndPopulateMembers(sectionTermId)
 	members.items.forEach((member) =>
 	{
 		const li = document.createElement("li");
-		li.innerHTML = member.firstName + " " + member.lastName;
+		li.innerHTML = member.firstname + " " + member.lastname;
 		membersList.appendChild(li);
 	});
 }
