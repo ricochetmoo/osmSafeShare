@@ -63,7 +63,7 @@ function getMembers(sectionTermId)
 	};
 	
 	const xhr = new XMLHttpRequest();
-	xhr.open('POST', 'osmi/request.php');
+	xhr.open('POST', 'osmi/request.php', false);
 	xhr.setRequestHeader("Authorization", "Bearer " + Cookies.get('oauth-token'));
 	xhr.send(JSON.stringify(data));
 
