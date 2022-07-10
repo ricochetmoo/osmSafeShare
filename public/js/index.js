@@ -63,11 +63,16 @@ function getMembers(sectionTermId)
 	};
 	
 	const xhr = new XMLHttpRequest();
-	xhr.open('GET', 'osmi/request.php');
+	xhr.open('POST', 'osmi/request.php');
 	xhr.setRequestHeader("Authorization", "Bearer " + Cookies.get('oauth-token'));
 	xhr.send(JSON.stringify(data));
 
 	console.log(xhr.responseText);
+}
+
+function populateMembers(members)
+{
+	
 }
 
 function addEventListenersByClass(className, listener, method)
