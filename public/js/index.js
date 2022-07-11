@@ -98,7 +98,7 @@ function getAndPopulateMembers(sectionTermId)
 	{
 		const age = member.age.split(" / ");
 
-		if (member.age >= 13)
+		if (age >= 13)
 		{
 			const li = document.createElement("li");
 			li.innerHTML = member.firstname + " " + member.lastname + " (" + member.age + ")";
