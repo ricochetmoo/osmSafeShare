@@ -125,12 +125,15 @@ function emailDetailsOfSelectedMembers()
 	{
 		if (element.classList.contains("selected"))
 		{
-			details +=
-			{
-				"scoutid": element.id,
-				"sectionId": element.dataset.sectionId,
-				"termid": element.dataset.termId
-			};
+			detail.push
+			(
+
+				{
+					"scoutid": element.id,
+					"sectionId": element.dataset.sectionId,
+					"termid": element.dataset.termId
+				}
+			);
 		}
 	});
 
