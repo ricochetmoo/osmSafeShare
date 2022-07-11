@@ -116,6 +116,34 @@ function getAndPopulateMembers(sectionTermId)
 	});
 }
 
+function getFullMemberDetails(member)
+{
+	const data = 
+	{
+		"endpoint": "ext/members/contact/",
+		"data":
+		{
+			"action": "getIndividual",
+			"scoutid": member.scoutId,
+			"sectionid": member.sectionId,
+			"termid": member.termId,
+			"context": "members"
+		}	
+	};
+	
+	const xhr = new XMLHttpRequest();
+	xhr.open('POST', 'osmi/request.php', false);
+	xhr.setRequestHeader("Authorization", "Bearer " + Cookies.get('oauth-token'));
+	xhr.send(JSON.stringify(data));
+
+	if (xhr.status == 403)
+	{
+		redirectToLoginAndRemoveCookieIfSet();
+	}
+
+	return JSON.parse(xhr.responseText);
+}
+
 function emailDetailsOfSelectedMembers()
 {
 	let details = [];
@@ -125,19 +153,20 @@ function emailDetailsOfSelectedMembers()
 	{
 		if (element.classList.contains("selected"))
 		{
-			detail.push
-			(
+			let member =
+			{
+				"scoutId": element.id,
+				"sectionId": element.dataset.sectionId,
+				"termId": element.dataset.termId
+			};
 
-				{
-					"scoutid": element.id,
-					"sectionId": element.dataset.sectionId,
-					"termid": element.dataset.termId
-				}
-			);
+			member = getFullMemberDetails(member);
+
+			console.log(member);
 		}
 	});
 
-	console.log(details);
+	//console.log(details);
 }
 
 function addEventListenersByClass(className, listener, method)
