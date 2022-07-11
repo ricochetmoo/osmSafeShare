@@ -104,6 +104,7 @@ function getAndPopulateMembers(sectionTermId)
 			li.innerHTML = member.firstname + " " + member.lastname + " (" + member.age + ")";
 			li.id = member.scoutid;
 			li.classList.add("member");
+			li.addEventListener("click", (event) => {event.element.classList.toggle("selected")});
 			membersList.appendChild(li);
 		}
 		

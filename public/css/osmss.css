@@ -3,3 +3,13 @@
 	color: #006ddf;
 	cursor: grab;
 }
+
+.member
+{
+	cursor: grab;
+}
+
+.member.selected
+{
+	color: red;
+}
