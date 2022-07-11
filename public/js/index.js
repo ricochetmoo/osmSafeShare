@@ -58,10 +58,8 @@ function getUserDetails()
 	);
 }
 
-function getMembers(sectionTermId)
-{
-	sectionTermId = sectionTermId.split("-");
-	
+function getMembers(sectionId, termId)
+{	
 	const data = 
 	{
 		"endpoint": "ext/members/contact/",
@@ -69,8 +67,8 @@ function getMembers(sectionTermId)
 		{
 			"action": "getListOfMembers",
 			"sort": "dob",
-			"sectionid": sectionTermId[0],
-			"termid": sectionTermId[1]
+			"sectionid": sectionId,
+			"termid": termId
 		}	
 	};
 	
@@ -89,7 +87,10 @@ function getMembers(sectionTermId)
 
 function getAndPopulateMembers(sectionTermId)
 {
-	const members = getMembers(sectionTermId);
+	const sectionId = sectionTermId.split("-")[0];
+	const termId = sectionTermId.split("-")[1];
+	const members = getMembers(sectionId, termId)
+	
 	
 	const membersList = document.querySelector("#members");
 	membersList.innerHTML = "";
@@ -105,10 +106,35 @@ function getAndPopulateMembers(sectionTermId)
 			li.id = member.scoutid;
 			li.classList.add("member");
 			li.addEventListener("click", (event) => {event.target.classList.toggle("selected")});
+
+			li.dataset.sectionId = sectionId;
+			li.dataset.termId = termId;
+
 			membersList.appendChild(li);
 		}
 		
 	});
+}
+
+function emailDetailsOfSelectedMembers()
+{
+	let details = [];
+	
+	document.querySelectorAll(".member").forEach
+	((element) =>
+	{
+		if (element.classList.contains("selected"))
+		{
+			details +=
+			{
+				"scoutid": element.id,
+				"sectionId": element.dataset.sectionId,
+				"termid": element.dataset.termId
+			};
+		}
+	});
+
+	console.log(details);
 }
 
 function addEventListenersByClass(className, listener, method)
@@ -123,3 +149,5 @@ function addEventListenersByClass(className, listener, method)
 redirectIfLoggedOut();
 getUserDetails();
 addEventListenersByClass("section", "click", getAndPopulateMembers);
+
+document.querySelector("#submit").addEventListener("click", (event) => {event.preventDefault(); emailDetailsOfSelectedMembers();})
