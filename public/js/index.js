@@ -96,9 +96,17 @@ function getAndPopulateMembers(sectionTermId)
 
 	members.items.forEach((member) =>
 	{
-		const li = document.createElement("li");
-		li.innerHTML = member.firstname + " " + member.lastname + " (" + member.age + ")";
-		membersList.appendChild(li);
+		const age = member.age.split(" / ");
+
+		if (member.age >= 13)
+		{
+			const li = document.createElement("li");
+			li.innerHTML = member.firstname + " " + member.lastname + " (" + member.age + ")";
+			li.id = member.scoutid;
+			li.classList.add("member");
+			membersList.appendChild(li);
+		}
+		
 	});
 }
 
